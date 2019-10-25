@@ -1,0 +1,6 @@
+---
+ubuntu_ssh_port: 22
+
+ubuntu_update_alternatives:
+  - name: editor
+    path: /usr/bin/vim.basic

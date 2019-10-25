@@ -1,0 +1,10 @@
+---
+- name: Restart Fail2ban
+  service: name=fail2ban state=restarted
+
+- name: Reload SSH
+  service: name=sshd state=restarted
+
+- name: Update DNS
+  become: yes
+  shell: resolvconf -u

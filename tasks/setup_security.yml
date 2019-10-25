@@ -1,0 +1,34 @@
+---
+- name: Install Fail2ban
+  apt: pkg=fail2ban state=latest update_cache=true
+  register: install_fail2ban
+
+- name: Start Fail2ban
+  service: name=fail2ban enabled=yes state=started
+  when: install_fail2ban is success
+
+- name: Add Fail2ban Config
+  copy: src=jail.local dest=/etc/fail2ban/ owner=root group=root
+  notify:
+    - Restart Fail2ban
+
+- name: SSH Config (Change Port)
+  lineinfile: dest=/etc/ssh/sshd_config regexp='^Port' line='Port "{{ ubuntu_ssh_port | default('22') }}"'
+  notify:
+    - Reload SSH
+  tags:
+    - aws
+
+- name: SSH Config (No Root Login)
+  lineinfile: dest=/etc/ssh/sshd_config regexp='^PermitRootLogin' line='PermitRootLogin no'
+  notify:
+    - Reload SSH
+  tags:
+    - aws
+
+- name: SSH Config (Allow Password Login)
+  lineinfile: dest=/etc/ssh/sshd_config regexp='^PasswordAuthentication' line='PasswordAuthentication yes'
+  notify:
+    - Reload SSH
+  tags:
+    - aws
