@@ -13,7 +13,7 @@
 - name: Setup users ssh login key
   authorized_key:
     user: "{{ item.username }}"
-    key: "{{ lookup('file', '{{ item.key }}') }}"
+    key: "{{ item.key }}"
     state: present
   when: item.key is defined
   with_items: '{{ users | default([]) }}'
