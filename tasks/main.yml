@@ -2,19 +2,6 @@
 - import_tasks: 'setup_packages.yml'
 - import_tasks: 'setup_security.yml'
 
-- name: Check if resolv.conf.d exists
-  stat:
-    path: /etc/resolvconf/resolv.conf.d/
-  register: resolv_conf_d
-
-- name: Add DNS Tail
-  copy: src=dns.tail dest=/etc/resolvconf/resolv.conf.d/tail owner=root group=root
-  when: resolv_conf_d.stat.exists and resolv_conf_d.stat.isdir
-  notify:
-    - Update DNS
-  tags:
-    - dns
-
 - name: Run update-alternatives
   command: "/usr/bin/env update-alternatives --set {{ item.name }} {{ item.path }}"
   with_items: "{{ ubuntu_update_alternatives }}"

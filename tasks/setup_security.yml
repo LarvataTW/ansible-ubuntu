@@ -16,19 +16,13 @@
   lineinfile: dest=/etc/ssh/sshd_config regexp='^Port' line='Port "{{ ubuntu_ssh_port | default('22') }}"'
   notify:
     - Reload SSH
-  tags:
-    - aws
 
 - name: SSH Config (No Root Login)
   lineinfile: dest=/etc/ssh/sshd_config regexp='^PermitRootLogin' line='PermitRootLogin no'
   notify:
     - Reload SSH
-  tags:
-    - aws
 
 - name: SSH Config (Allow Password Login)
   lineinfile: dest=/etc/ssh/sshd_config regexp='^PasswordAuthentication' line='PasswordAuthentication yes'
   notify:
     - Reload SSH
-  tags:
-    - aws
