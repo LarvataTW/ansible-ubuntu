@@ -4,3 +4,10 @@ ubuntu_ssh_port: 22
 ubuntu_update_alternatives:
   - name: editor
     path: /usr/bin/vim.basic
+
+ubuntu_users: []
+  #- username: user1
+  #  use_sudo: yes
+  #  key: /path/to/ssh/public/key
+  #- username: user2
+  #  use_sudo: no
