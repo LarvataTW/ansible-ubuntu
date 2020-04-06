@@ -11,3 +11,24 @@ ubuntu_users: []
   #  key: <ssh_public_key_content>
   #- username: user2
   #  use_sudo: no
+
+ubuntu_packages:
+  - build-essential
+  - curl
+  - expect
+  - fail2ban
+  - git
+  - htop
+  - nfs-common
+  - openssl
+  - sysstat
+  - tmux
+  - unattended-upgrades
+  - unzip
+  - vim
+  - zip
+  - zsh
+
+ubuntu_deb_package_urls:
+  - https://github.com/tstack/lnav/releases/download/v0.8.5/lnav_0.8.5_amd64.deb
+  - https://github.com/sharkdp/bat/releases/download/v0.13.0/bat_0.13.0_amd64.deb

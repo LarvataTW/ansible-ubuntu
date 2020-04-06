@@ -3,30 +3,13 @@
   apt: update_cache=true
   register: update_packages_list
 
-- name: Setup Packages
+- name: Install Packages
   apt: pkg={{ item }} state=latest
-  with_items:
-    - build-essential
-    - unattended-upgrades
-    - fail2ban
-    - openssl
-    - tmux
-    - htop
-    - curl
-    - git
-    - vim
-    - zsh
-    - zip
-    - unzip
-    - expect
-    - nfs-common
-  register: setup_packages
+  with_items: "{{ ubuntu_packages }}"
   when: update_packages_list is success
 
-- name: Install lnav with .deb package from the internet.
+- name: Install Packages via deb
   apt:
-    deb: https://github.com/tstack/lnav/releases/download/v0.8.3/lnav_0.8.3_amd64.deb
-
-- name: Install bat with .deb package from the internet.
-  apt:
-    deb: https://github.com/sharkdp/bat/releases/download/v0.4.1/bat_0.4.1_amd64.deb
+    deb: "{{ item }}"
+  with_items: "{{ ubuntu_deb_package_urls }}"
+  when: update_packages_list is success
