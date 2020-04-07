@@ -3,12 +3,12 @@
 - name: Create users
   user: name={{ item.username }} shell=/usr/bin/zsh createhome=yes comment='Created by Ansible'
   when: item.username is defined
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Setup users passwords
   user: name={{ item.username }} password={{ item.password }}
   when: item.password is defined
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Setup users ssh login key
   authorized_key:
@@ -16,7 +16,7 @@
     key: "{{ item.key }}"
     state: present
   when: item.key is defined
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Config users as sudoers
   lineinfile: "dest=/etc/sudoers
@@ -27,7 +27,7 @@
   when:
     - item.use_sudo is defined
     - '{{ item.use_sudo }} == True'
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Copy .vimrc into users
   copy:
@@ -37,7 +37,7 @@
     group: "{{ item.username }}"
     mode: 0644
   when: item.username is defined
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Copy .my.cnf into users
   copy:
@@ -47,7 +47,7 @@
     group: "{{ item.username }}"
     mode: 0644
   when: item.username is defined
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Create users .profile
   file:
@@ -57,7 +57,7 @@
     mode: 0644
     state: touch
   when: item.username is defined
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Config users .profile
   blockinfile:
@@ -66,4 +66,4 @@
       export LANGUAGE=en_US.UTF-8
       export LANG=en_US.UTF-8
       export LC_ALL=en_US.UTF-8
-  with_items: '{{ users | default([]) }}'
+  with_items: '{{ ubuntu_users | default([]) }}'
