@@ -1,7 +1,7 @@
 ---
 
 - name: Create users
-  user: name={{ item.username }} shell=/usr/bin/zsh createhome=yes comment='Created by Ansible'
+  user: name={{ item.username }} createhome=yes comment='Created by Ansible'
   when: item.username is defined
   with_items: '{{ ubuntu_users | default([]) }}'
 
