@@ -1,13 +1,14 @@
 ---
 
 - name: Create users
-  user: name={{ item.username }} createhome=yes comment='Created by Ansible'
+  user:
+    name: "{{ item.username }}"
+    password: "{{ item.password | default(omit) }}"
+    shell: "{{ item.shell | default(omit) }}"
+    state: present
+    create_home: yes
+    comment: "{{ item.comment | default('Created by Ansible') }}"
   when: item.username is defined
-  with_items: '{{ ubuntu_users | default([]) }}'
-
-- name: Setup users passwords
-  user: name={{ item.username }} password={{ item.password }}
-  when: item.password is defined
   with_items: '{{ ubuntu_users | default([]) }}'
 
 - name: Setup users ssh login key

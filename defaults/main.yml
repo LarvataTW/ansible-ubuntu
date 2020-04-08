@@ -8,8 +8,11 @@ ubuntu_update_alternatives:
 ubuntu_users: []
   #- username: user1
   #  use_sudo: yes
-  #  key: <ssh_public_key_content>
+  #  key: "ssh_public_key_content"
   #- username: user2
+  #  password: "secret
+  #  shell: "/bin/bash"
+  #  comment: "some notes"
   #  use_sudo: no
 
 ubuntu_packages:
