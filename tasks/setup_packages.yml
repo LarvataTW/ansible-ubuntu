@@ -4,8 +4,9 @@
   register: update_packages_list
 
 - name: Install Packages
-  apt: pkg={{ item }} state=latest
-  with_items: "{{ ubuntu_packages }}"
+  apt:
+    pkg: "{{ ubuntu_packages }}"
+    state: latest
   when: update_packages_list is success
 
 - name: Install Packages via deb
