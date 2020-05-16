@@ -14,3 +14,23 @@
     deb: "{{ item }}"
   with_items: "{{ ubuntu_deb_package_urls }}"
   when: update_packages_list is success
+
+- name: Stop Apt Auto Update Services
+  service:
+    name: "{{ item }}"
+    enabled: no
+  with_items:
+    - apt-daily
+    - apt-daily.timer
+    - apt-daily-upgrade
+    - apt-daily-upgrade.timer
+
+- name: Disable Apt Auto Update Services
+  service:
+    name: "{{ item }}"
+    enabled: no
+  with_items:
+    - apt-daily
+    - apt-daily.timer
+    - apt-daily-upgrade
+    - apt-daily-upgrade.timer
