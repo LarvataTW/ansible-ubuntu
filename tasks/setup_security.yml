@@ -8,7 +8,7 @@
   when: install_fail2ban is success
 
 - name: Add Fail2ban Config
-  copy: src=jail.local dest=/etc/fail2ban/ owner=root group=root
+  template: src=jail.local.j2 dest=/etc/fail2ban/jail.local owner=root group=root
   notify:
     - Restart Fail2ban
 
