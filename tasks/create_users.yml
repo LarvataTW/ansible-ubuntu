@@ -22,7 +22,7 @@
 - name: Config users as sudoers
   lineinfile: "dest=/etc/sudoers
     insertafter=EOF
-    line='{{ item.username }} ALL=(ALL) ALL'
+    line='{{ item.username }} ALL=(ALL) NOPASSWD:ALL'
     regexp='^{{ item.username }} .*'
     state=present"
   when:
