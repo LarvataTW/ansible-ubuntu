@@ -1,5 +1,4 @@
 ---
-ubuntu_ssh_port: 22
 
 ubuntu_update_alternatives:
   - name: editor
@@ -21,5 +20,3 @@ ubuntu_packages: []
 
 ubuntu_deb_package_urls:
   - https://github.com/tstack/lnav/releases/download/v0.9.0/lnav_0.9.0_amd64.deb
-
-ubuntu_fail2ban_ignoreip: 127.0.0.1/32 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16

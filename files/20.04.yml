@@ -5,7 +5,6 @@ ubuntu_packages:
   - build-essential
   - curl
   - expect
-  - fail2ban
   - git
   - htop
   - iftop
