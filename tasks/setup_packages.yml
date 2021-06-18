@@ -6,7 +6,7 @@
 - name: Install Packages
   apt:
     pkg: "{{ ubuntu_packages }}"
-    state: latest
+    state: present
   when: update_packages_list is success
 
 - name: Install Packages via deb
