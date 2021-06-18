@@ -53,7 +53,7 @@
 - name: Setup .profile for users
   template:
     src: profile.j2
-    path: "/home/{{ item.username }}/.profile"
+    dest: "/home/{{ item.username }}/.profile"
     owner: "{{ item.username }}"
     group: "{{ item.username }}"
     mode: 0644
