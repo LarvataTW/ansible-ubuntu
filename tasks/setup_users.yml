@@ -11,7 +11,7 @@
   when: item.username is defined
   with_items: '{{ ubuntu_users | default([]) }}'
 
-- name: Setup users ssh login key
+- name: Setup authorized_keys for users
   authorized_key:
     user: "{{ item.username }}"
     key: "{{ item.key }}"
@@ -30,19 +30,19 @@
     - '{{ item.use_sudo }} == True'
   with_items: '{{ ubuntu_users | default([]) }}'
 
-- name: Copy .vimrc into users
-  copy:
-    src: files/vimrc
+- name: Setup .vimrc for users
+  template:
+    src: vimrc.j2
     dest: "/home/{{ item.username }}/.vimrc"
     owner: "{{ item.username }}"
     group: "{{ item.username }}"
-    mode: 0644
+    mode: 0640
   when: item.username is defined
   with_items: '{{ ubuntu_users | default([]) }}'
 
-- name: Copy .my.cnf into users
-  copy:
-    src: files/my.cnf
+- name: Setup .my.cnf for users
+  template:
+    src: my.cnf.j2
     dest: "/home/{{ item.username }}/.my.cnf"
     owner: "{{ item.username }}"
     group: "{{ item.username }}"
@@ -50,21 +50,12 @@
   when: item.username is defined
   with_items: '{{ ubuntu_users | default([]) }}'
 
-- name: Create users .profile
-  file:
+- name: Setup .profile for users
+  template:
+    src: profile.j2
     path: "/home/{{ item.username }}/.profile"
     owner: "{{ item.username }}"
     group: "{{ item.username }}"
     mode: 0644
-    state: touch
   when: item.username is defined
-  with_items: '{{ ubuntu_users | default([]) }}'
-
-- name: Config users .profile
-  blockinfile:
-    path: "/home/{{ item.username }}/.profile"
-    block: |
-      export LANGUAGE=en_US.UTF-8
-      export LANG=en_US.UTF-8
-      export LC_ALL=en_US.UTF-8
   with_items: '{{ ubuntu_users | default([]) }}'
