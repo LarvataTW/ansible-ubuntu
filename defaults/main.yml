@@ -15,24 +15,9 @@ ubuntu_users: []
   #  comment: "some notes"
   #  use_sudo: no
 
-ubuntu_packages:
-  - build-essential
-  - curl
-  - expect
-  - fail2ban
-  - git
-  - htop
-  - iftop
-  - nfs-common
-  - openssl
-  - silversearcher-ag
-  - sysstat
-  - tmux
-  - unattended-upgrades
-  - unzip
-  - vim
-  - zip
-  - zsh
+ubuntu_packages: []
+# files/18.04.yml
+# files/20.04.yml
 
 ubuntu_deb_package_urls:
   - https://github.com/tstack/lnav/releases/download/v0.9.0/lnav_0.9.0_amd64.deb

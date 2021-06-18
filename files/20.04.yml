@@ -1,0 +1,21 @@
+---
+
+ubuntu_packages:
+  - build-essential
+  - curl
+  - expect
+  - fail2ban
+  - git
+  - htop
+  - iftop
+  - net-tools
+  - nfs-common
+  - openssl
+  - silversearcher-ag
+  - sysstat
+  - tmux
+  - unattended-upgrades
+  - unzip
+  - vim
+  - zip
+  - zsh
