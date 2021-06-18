@@ -1,6 +1,7 @@
 ---
 
 ubuntu_packages:
+  - bat
   - build-essential
   - curl
   - expect
