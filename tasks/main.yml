@@ -3,7 +3,7 @@
 - name: Include OS-specific variables.
   include_vars: "{{ item }}"
   with_first_found:
-    - files/{{ ansible_distribution_version | lower }}.yml
+    - vars/{{ ansible_distribution_version | lower }}.yml
 
 - import_tasks: 'setup_packages.yml'
 - import_tasks: 'setup_users.yml'
