@@ -6,7 +6,7 @@
     - vars/{{ ansible_distribution_version | lower }}.yml
 
 - name: Merge list of packages
-  set_facts:
+  set_fact:
     ubuntu_packages: "{{ ubuntu_packages + ubuntu_os_specific_packages }}"
 
 - import_tasks: 'setup_packages.yml'
