@@ -6,6 +6,5 @@
     - files/{{ ansible_distribution_version | lower }}.yml
 
 - import_tasks: 'setup_packages.yml'
-- import_tasks: 'setup_security.yml'
 - import_tasks: 'setup_users.yml'
 - import_tasks: 'setup_misc.yml'
