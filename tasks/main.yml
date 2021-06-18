@@ -5,6 +5,10 @@
   with_first_found:
     - vars/{{ ansible_distribution_version | lower }}.yml
 
+- name: Merge list of packages
+  set_facts:
+    ubuntu_packages: "{{ ubuntu_packages + ubuntu_os_specific_packages }}"
+
 - import_tasks: 'setup_packages.yml'
 - import_tasks: 'setup_users.yml'
 - import_tasks: 'setup_misc.yml'

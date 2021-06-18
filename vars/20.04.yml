@@ -1,21 +1,5 @@
 ---
 
-ubuntu_packages:
+ubuntu_os_specific_packages:
   - bat
-  - build-essential
-  - curl
-  - expect
-  - git
-  - htop
-  - iftop
   - net-tools
-  - nfs-common
-  - openssl
-  - silversearcher-ag
-  - sysstat
-  - tmux
-  - unattended-upgrades
-  - unzip
-  - vim
-  - zip
-  - zsh
