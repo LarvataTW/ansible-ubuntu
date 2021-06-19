@@ -1,0 +1,20 @@
+---
+
+- name: Install ntpdate
+  package:
+    name: ntpdate
+    state: present
+  register: ntpdate_installed
+
+- name: Update time
+  command: "ntpdate -s {{ ntpdate_server | default('0.asia.pool.ntp.org') }}"
+  register: ntpdate_works
+  when: ntpdate_installed
+
+- name: Create cron job for time update
+  cron:
+    name: Update Time
+    user: root
+    minute: 0
+    job: "ntpdate -s -u {{ ntpdate_server | default('0.asia.pool.ntp.org') }}"
+  when: ntpdate_works
