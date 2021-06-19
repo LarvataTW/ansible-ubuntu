@@ -1,5 +1,17 @@
 ---
 
+# export LC_ALL="en_US.UTF-8"
+# export LC_CTYPE="en_US.UTF-8"
+# sudo dpkg-reconfigure locales
+- name: Setup a locale language.
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: update hostname with inventory_hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
 - name: Run update-alternatives
   command: "/usr/bin/env update-alternatives --set {{ item.name }} {{ item.path }}"
   with_items: "{{ ubuntu_update_alternatives }}"
@@ -17,3 +29,8 @@
     - { limit_type: '-', limit_item: 'nproc', value: 65536 }
     - { limit_type: 'soft', limit_item: 'memlock', value: unlimited }
     - { limit_type: 'hard', limit_item: 'memlock', value: unlimited }
+
+- name: Disabling Swap
+  raw: swapoff -a; sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+  tags:
+    - swap
