@@ -2,7 +2,7 @@
 
 ## Cautions
 
-A task with "swap" tag will disable SWAP partition.
+A task with "swap" tag will disable SWAP partition.   
 If you don't want to disable SWAP, play this role with `--skip-tags swap`.
 
 ## Role Variables
